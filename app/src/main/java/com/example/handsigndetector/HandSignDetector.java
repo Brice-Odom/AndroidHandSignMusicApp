@@ -2,7 +2,7 @@
 // This file contains the implementation for hand sign detection algorithms
 // Add this as a separate class in your project
 
-package app.src.main.java.com.example.handsigndetector;
+package com.example.handsigndetector;
 
 import com.google.mlkit.vision.common.PointF3D;
 import com.google.mlkit.vision.hands.HandLandmark;

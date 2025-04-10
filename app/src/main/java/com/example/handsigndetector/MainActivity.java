@@ -1,5 +1,5 @@
 // MainActivity.java
-package app.src.main.java.com.example.handsigndetector;
+package com.example.handsigndetector;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,14 +22,11 @@ import android.util.Size;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.common.util.concurrent.ListenableFuture;
-import com.google.mlkit.vision.common.InputImage;
-import com.google.mlkit.vision.hand.HandLandmark;
-import com.google.mlkit.vision.hand.HandLandmarker;
-import com.google.mlkit.vision.hand.HandLandmarkerOptions;
-import com.google.mlkit.vision.hand.hands.HandsOptions;
-import com.google.mlkit.vision.hands.Hands;
+import com.google.mlkit.vision.hands.Hand;
+import com.google.mlkit.vision.hands.HandLandmark;
 import com.google.mlkit.vision.hands.HandsOptions;
+import com.google.mlkit.vision.hands.HandsResult;
+import com.google.mlkit.vision.hands.Hands;
 
 import java.util.HashMap;
 import java.util.Map;

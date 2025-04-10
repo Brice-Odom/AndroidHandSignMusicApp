@@ -1,5 +1,5 @@
 // MainActivity.java
-package com.example.handsigndetector;
+package app.src.main.java.com.example.handsigndetector;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;

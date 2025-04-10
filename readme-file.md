@@ -5,12 +5,14 @@ This Android application uses the device's camera to detect different hand signs
 ## Features
 
 - Real-time hand landmark detection using ML Kit
-- Recognition of 5 different hand signs:
+- Recognition of 7 different hand signs:
   - Open Palm (plays C note)
   - Closed Fist (plays D note)
   - Pointing Up (plays E note)
   - Victory Sign (plays F note)
   - Thumb Up (plays G note)
+  - Pinky Out (plays A note) - like holding a tea cup
+  - Rock On (plays B note) - index finger and pinky extended
 - Visual feedback showing the detected hand sign
 - Audio feedback by playing a corresponding musical note for each detected sign
 
@@ -33,6 +35,8 @@ This Android application uses the device's camera to detect different hand signs
    - `note_e.mp3` - E note sound
    - `note_f.mp3` - F note sound
    - `note_g.mp3` - G note sound
+   - `note_a.mp3` - A note sound
+   - `note_b.mp3` - B note sound
 5. Build and run the application on a physical device (emulators may not support camera properly).
 
 ## Dependencies
@@ -60,6 +64,8 @@ The application requires the following permissions:
    - Point up with your index finger to hear the E note
    - Make a victory/peace sign to hear the F note
    - Give a thumbs up to hear the G note
+   - Extend only your pinky finger (like holding a tea cup) to hear the A note
+   - Make a "rock on" sign (extend index finger and pinky) to hear the B note
 
 ## How It Works
 

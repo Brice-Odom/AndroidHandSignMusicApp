@@ -63,6 +63,22 @@ public class HandSignDetector {
                !isPinkyFingerOpen(landmarks);
     }
     
+    public static boolean isPinkyOut(List<HandLandmark> landmarks) {
+        // Pinky out: pinky finger extended, other fingers closed (like drinking tea)
+        return !isIndexFingerOpen(landmarks) && 
+               !isMiddleFingerOpen(landmarks) && 
+               !isRingFingerOpen(landmarks) && 
+               isPinkyFingerOpen(landmarks);
+    }
+    
+    public static boolean isRockOn(List<HandLandmark> landmarks) {
+        // Rock on sign: index and pinky extended, other fingers closed
+        return isIndexFingerOpen(landmarks) && 
+               !isMiddleFingerOpen(landmarks) && 
+               !isRingFingerOpen(landmarks) && 
+               isPinkyFingerOpen(landmarks);
+    }
+    
     // Helper methods
     
     private static boolean areAllFingersOpen(List<HandLandmark> landmarks) {

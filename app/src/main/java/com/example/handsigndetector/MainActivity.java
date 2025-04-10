@@ -22,6 +22,8 @@ import android.util.Size;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.common.util.concurrent.ListenableFuture;
+import com.google.mlkit.vision.common.InputImage;
 import com.google.mlkit.vision.hands.Hand;
 import com.google.mlkit.vision.hands.HandLandmark;
 import com.google.mlkit.vision.hands.HandsOptions;
@@ -29,6 +31,7 @@ import com.google.mlkit.vision.hands.HandsResult;
 import com.google.mlkit.vision.hands.Hands;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
@@ -88,6 +91,8 @@ public class MainActivity extends AppCompatActivity {
         soundMap.put("POINTING_UP", soundPool.load(this, R.raw.note_e, 1));
         soundMap.put("VICTORY", soundPool.load(this, R.raw.note_f, 1));
         soundMap.put("THUMB_UP", soundPool.load(this, R.raw.note_g, 1));
+        soundMap.put("PINKY_OUT", soundPool.load(this, R.raw.note_a, 1));
+        soundMap.put("ROCK_ON", soundPool.load(this, R.raw.note_b, 1));
     }
 
     private void initializeHandDetector() {
@@ -138,9 +143,21 @@ public class MainActivity extends AppCompatActivity {
     private class HandSignAnalyzer implements ImageAnalysis.Analyzer {
         private long lastPlayTime = 0;
         private String lastDetectedSign = "";
+        private long lastProcessingTimeMs = 0;
+        private static final long PROCESSING_INTERVAL_MS = 100; // Process every 100ms
 
         @Override
         public void analyze(@NonNull ImageProxy imageProxy) {
+            long currentTimeMs = System.currentTimeMillis();
+            
+            // Only process frames at a specific interval
+            if (currentTimeMs - lastProcessingTimeMs < PROCESSING_INTERVAL_MS) {
+                imageProxy.close();
+                return;
+            }
+            
+            lastProcessingTimeMs = currentTimeMs;
+            
             InputImage image = InputImage.fromMediaImage(
                     imageProxy.getImage(), 
                     imageProxy.getImageInfo().getRotationDegrees()
@@ -177,56 +194,26 @@ public class MainActivity extends AppCompatActivity {
         }
 
         private String identifyHandSign(HandsResult handResults) {
-            // This is a simplified hand sign detection
-            // In a real app, you would implement more sophisticated logic
-            // based on the relative positions of hand landmarks
-            
-            // Example classification logic:
             Hand hand = handResults.get(0);
             List<HandLandmark> landmarks = hand.getLandmarks();
             
-            // Simplified detection - in reality you would need more sophisticated algorithms
-            if (isOpenPalm(landmarks)) {
+            if (HandSignDetector.isOpenPalm(landmarks)) {
                 return "OPEN_PALM";
-            } else if (isClosedFist(landmarks)) {
+            } else if (HandSignDetector.isClosedFist(landmarks)) {
                 return "CLOSED_FIST";
-            } else if (isPointingUp(landmarks)) {
+            } else if (HandSignDetector.isPointingUp(landmarks)) {
                 return "POINTING_UP";
-            } else if (isVictorySign(landmarks)) {
+            } else if (HandSignDetector.isVictorySign(landmarks)) {
                 return "VICTORY";
-            } else if (isThumbUp(landmarks)) {
+            } else if (HandSignDetector.isThumbUp(landmarks)) {
                 return "THUMB_UP";
+            } else if (HandSignDetector.isPinkyOut(landmarks)) {
+                return "PINKY_OUT";
+            } else if (HandSignDetector.isRockOn(landmarks)) {
+                return "ROCK_ON";
             }
             
             return "UNKNOWN";
-        }
-        
-        // These methods would contain the actual detection logic
-        // based on landmark positions
-        private boolean isOpenPalm(List<HandLandmark> landmarks) {
-            // Implementation for open palm detection
-            // Example: Check if all fingers are extended
-            return false; // Placeholder
-        }
-        
-        private boolean isClosedFist(List<HandLandmark> landmarks) {
-            // Implementation for closed fist detection
-            return false; // Placeholder
-        }
-        
-        private boolean isPointingUp(List<HandLandmark> landmarks) {
-            // Implementation for pointing up gesture
-            return false; // Placeholder
-        }
-        
-        private boolean isVictorySign(List<HandLandmark> landmarks) {
-            // Implementation for victory sign (V sign)
-            return false; // Placeholder
-        }
-        
-        private boolean isThumbUp(List<HandLandmark> landmarks) {
-            // Implementation for thumbs up gesture
-            return false; // Placeholder
         }
     }
 

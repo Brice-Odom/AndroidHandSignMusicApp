@@ -7,6 +7,8 @@ For the hand sign detection app to play different notes when hand signs are dete
 3. **note_e.mp3** - E note sound file
 4. **note_f.mp3** - F note sound file
 5. **note_g.mp3** - G note sound file
+6. **note_a.mp3** - A note sound file
+7. **note_b.mp3** - B note sound file
 
 ## Creating the raw directory
 

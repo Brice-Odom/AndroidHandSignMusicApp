@@ -1,0 +1,32 @@
+# Audio Resources Setup
+
+For the hand sign detection app to play different notes when hand signs are detected, you need to create the following audio files and place them in the `res/raw` directory:
+
+1. **note_c.mp3** - C note sound file
+2. **note_d.mp3** - D note sound file  
+3. **note_e.mp3** - E note sound file
+4. **note_f.mp3** - F note sound file
+5. **note_g.mp3** - G note sound file
+6. **note_a.mp3** - A note sound file
+7. **note_b.mp3** - B note sound file
+
+## Creating the raw directory
+
+1. In Android Studio, right-click on the `res` folder in your project
+2. Select New > Android Resource Directory
+3. Select "raw" as the Resource type
+4. Click OK
+
+## Adding sound files
+
+1. Download or create MP3 files for each of the notes (C, D, E, F, G)
+2. Right-click on the newly created `raw` folder
+3. Select New > File
+4. Choose your sound files from your computer
+
+## Free sound resources
+
+You can find free audio files for musical notes at:
+- freesound.org
+- soundbible.com
+- Or create your own using a synthesizer app
